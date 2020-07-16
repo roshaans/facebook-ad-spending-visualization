@@ -1,0 +1,105 @@
+.graph {
+    /* width: 40%;
+    height: 300px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.graphContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+.presidentSelect {
+    margin-top: 15px;
+    display:flex;
+    justify-content: center;
+}
+@media only screen and (max-width: 768px) {
+   .graphContainer {
+    flex-direction: column;
+    align-items: center;
+   }
+   .graph {
+       margin-bottom: 10px;
+   }
+  }
+
+.options {
+display:flex;
+justify-content: center;
+flex-direction: column;
+  }
+
+  .dates {
+    display: flex;
+justify-content: center;
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    /* width: 20%;
+    border: 1px solid black;
+    margin: 10px; */
+}
+.name {
+    display: flex;
+    justify-content: center;
+}
+.sliderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.toolBar {
+    background-color: #d72020;
+    color: white;
+}
+
+.mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
+    height: 25px;
+    justify-content: center;
+}
+@media only screen and (max-width: 760px) {
+    #some-element { display: none; }
+  }
+
+
+  .sliderData {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-content: center;
+  }
+
+  .disableDiv {
+    pointer-events:none;
+     display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-content: center;
+
+  }
+  .header {
+    display: flex; 
+    justify-content: center;
+  }
+
+  #time .e-range.e-drag-horizontal {
+    height: 8px;
+
+  }
+  #time .e-slider-track {
+    height: 8px;
+
+  }
+  #time .e-handle,
+ .e-handle {
+  height: 20px;
+  width: 20px;
+  margin-left: -10px;
+  top: calc(50% - 8px);
+}

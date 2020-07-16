@@ -1,0 +1,81 @@
+<mat-toolbar class = "toolBar">
+    <h1 class="animated lightSpeedInRight header" >Delta Lab</h1>
+  </mat-toolbar>
+  <!-- <ejs-multiselect id='multiselectelement' [dataSource]='presidentialCandidatesList'[mode]='mode' [maximumSelectionLength]='maximumSelectionLength' [placeholder]='placeholder'></ejs-multiselect> -->
+  
+
+<div class = "options"> 
+  <div class = "presidentSelect">
+
+      <ejs-multiselect class="animated zoomInDown"  (change) = 'selectedObject($event)' [fields]= 'fields' id='multiselectelement' [placeholder]='placeholder' [maximumSelectionLength]='maximumSelectionLength' [dataSource]='presidentialCandidatesList'></ejs-multiselect>
+      <ng-template #itemTemplate="" let-data="">
+          <!--set the value to itemTemplate property-->
+          <div><span class='name'>{{data.name}}</span><span class ='city'>{{data.party}}</span></div>            
+      </ng-template>
+    </div>
+
+      <div class = "dates">
+      <div class = "container">
+        <h2   style = "margin-top: 15px;" *ngIf="!firstGraphShow" > Adjust the slider to display data for a particular time period.</h2>
+        <h3   style = "display:flex; justify-content: center;"*ngIf="!firstGraphShow" > Note: The time scale of data is one week.  </h3>
+
+     
+      </div>
+
+    </div>
+
+<div class = "animated bounceInDown" *ngIf="!firstGraphShow" [ngClass]="{'disableDiv': disableTimeline}" > 
+    
+        <div >
+            <!-- style="width: 90%; margin-left: 50px; margin-right: 50px;" -->
+          <ejs-slider (change) = "sliderChanged($event)" id='time' [value]='timevalue'  [showButtons]='showButtons' [min] = "mintime" [max] = "maxtime" [step] = 'steptime'   [ticks]='timeticks'  [tooltip]='timetooltip'[type]='rangetype'
+          (tooltipChange)='tooltipChange($event)' (renderingTicks)='renderingTicks($event)'
+          ></ejs-slider>
+        </div>
+</div>
+</div> 
+<div *ngIf="!firstGraphShow">
+
+  <h3 class = "animated fadeInUp delay-1s" style = "display: flex; justify-content: center; margin-top: 20px; "> <strong> Total Presidential Candidate(s) Digital Ad Spending In The U.S. </strong></h3>
+  <h4 class = "animated fadeIn delay-1s" style = "display: flex; justify-content: center;margin-top:-15px; "> {{dateRange}} </h4>
+
+</div>
+
+<div  class = "graphContainer">
+<div  class="animated zoomInDown graph" *ngIf="!firstGraphShow"  style = "background-color: #d72020; margin-top: 20px;"> 
+  <div class = "chart" >
+    <h2 style = "justify-content: center; display: flex; margin-top: 15px; color: white;">{{selected[0]}}</h2> 
+    <h2 style = "justify-content: center; display: flex; margin-top: 15px; color: white; text-align: center;">
+      Highest Spending:{{ maxCandidateOne.max  | currency: 'USD' : 'symbol' : '1.0-0' }} - {{ maxCandidateOne.state }}
+
+      <br/>
+      Total:{{ totalSpendingForCandidateOne | currency: 'USD' : 'symbol' : '1.0-0' }}
+
+    </h2>
+   
+
+    <h1 style = "display: flex; justify-content: center; color: white;" *ngIf = "noDataForFirstCandidate === true"> There is no data for this time period.</h1>
+  <app-google-charts [chartData] = "0" [chartTitle] = "title" ></app-google-charts>
+</div>
+
+</div>
+<div class="animated zoomInDown graph" *ngIf="!secondGraphShow"   style = "background-color: #d72020; margin-top: 20px;"> 
+    <div class = "chart" >
+  <h2 style = "justify-content: center; display: flex; margin-top: 15px; color: white;">{{selected[1]}}</h2>
+  <h2 style = "justify-content: center; display: flex; margin-top: 15px; color: white;text-align: center;">
+    Highest Spending:{{ maxCandidateTwo.max  | currency: 'USD' : 'symbol' : '1.0-0' }} - {{ maxCandidateTwo.state }}
+
+    <br/>
+      Total:{{ totalSpendingForCandidateTwo | currency: 'USD' : 'symbol' : '1.0-0' }} 
+
+    </h2> 
+
+  <h1 style = "display: flex; justify-content: center; color: white;" *ngIf = "noDataForSecondCandidate === true"> There is no data for this time period. </h1>
+  <!-- <app-google-charts [chartData] = 1 [chartTitle] = "title" ></app-google-charts> -->
+
+  <app-chart-two [chartData] = "1" [chartTitle] = "title" ></app-chart-two>
+
+</div>
+
+</div>
+</div>
