@@ -18,7 +18,7 @@ This project was developed to help visualize presidential candidates digital ad 
 - Dynamic max-range depending upon chosen candidates
 
 > For a closer look, see [here!](https://regional-ad-spending.web.app/spending)
-<img src = "Images/visualization.gif" />
+>> <img src = "Images/visualization.gif" />
 
 ## Development server
 
