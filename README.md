@@ -1,4 +1,4 @@
-# Digital Ad Spending Visualation for Presidential Candidates
+# 📊 Digital Ad Spending Visualation for Presidential Candidates
 
 > ## Play around with the visualization [here!](https://regional-ad-spending.web.app/spending)
 
