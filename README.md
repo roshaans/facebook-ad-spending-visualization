@@ -1,6 +1,6 @@
 # 📊 Digital Ad Spending Visualation for Presidential Candidates
 
-> ## Play around with the visualization [here!](https://regional-ad-spending.web.app/spending)
+> ## Play around with the visualization [here!](https://regionalspending.web.app/spending)
 
 This project was developed to help visualize presidential candidates digital ad spending. I created it for the Delta Lab at Wesleyan University from data collected by Professor Pavel from the Quantitative Analysis Center. 
 
@@ -17,7 +17,7 @@ This project was developed to help visualize presidential candidates digital ad 
 - Total spending for the time period as well as highest state data
 - Dynamic max-range depending upon chosen candidates
 
-> For a closer look, see [here!](https://regional-ad-spending.web.app/spending)
+> For a closer look, see [here!](https://regionalspending.web.app/spending)
 >> <img src = "Images/visualization.gif" />
 
 ## Development server
