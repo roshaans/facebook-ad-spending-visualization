@@ -4,8 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 
-  {path: 'spending', component: MainComponent}, 
-  {path: '', redirectTo: '/spending', pathMatch: "full"}
+  {path: 'spending', component: MainComponent},
+  {path: '', redirectTo: '/spending', pathMatch: 'full'}
 ];
 
 @NgModule({
