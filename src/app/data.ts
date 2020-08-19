@@ -1,4 +1,4 @@
 export class Data {
-    newchartData = ["", ""]
+    newchartData = ['', '']
 
 }

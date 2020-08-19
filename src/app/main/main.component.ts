@@ -8,7 +8,7 @@ import { Component, ViewChild, AfterViewInit, OnInit, HostListener } from '@angu
 import { FormControl } from '@angular/forms'
 import * as Moment from 'moment';
 import { DataFrame } from 'dataframe-js';
-import { Observable } from 'rxjs'; // Angular 6 
+import { Observable } from 'rxjs'; // Angular 6
 import { DataForCandidates } from '../data-for-candidates';
 
 declare var isItMobile: any;
@@ -24,10 +24,10 @@ export class MainComponent implements OnInit {
 
 
 
-  //Form Control Variables
+  // Form Control Variables
   regionalSpending = new FormControl();
 
-  //date Object that has current Date
+  // date Object that has current Date
   date = new FormControl(new Date());
 
   // Selected Start Date from form
@@ -36,26 +36,26 @@ export class MainComponent implements OnInit {
   endDate = new FormControl(new Date(2020, 5, 10));
 
 
-  //List of presidential candidates
-  presidentialCandidatesList = [{ name: "Joe Biden", party: "Democratic" }, { name: "Cory Booker", party: "Democratic" }, { name: "Pete Buttigieg", party: "Democratic" }, { name: "Amy Klobuchar", party: "Democratic" }, { name: "Andrew Yang for President 2020", party: "Democratic" }, { name: "Bernie Sanders", party: "Democratic" }, { name: "Tom Steyer", party: "Democratic" }, { name: "Elizabeth Warren", party: "Democratic" }, { name: "Donald J. Trump", party: "Republican" }]
+  // List of presidential candidates
+  presidentialCandidatesList = [{ name: 'Joe Biden', party: 'Democratic' }, { name: 'Cory Booker', party: 'Democratic' }, { name: 'Pete Buttigieg', party: 'Democratic' }, { name: 'Amy Klobuchar', party: 'Democratic' }, { name: 'Andrew Yang for President 2020', party: 'Democratic' }, { name: 'Bernie Sanders', party: 'Democratic' }, { name: 'Tom Steyer', party: 'Democratic' }, { name: 'Elizabeth Warren', party: 'Democratic' }, { name: 'Donald J. Trump', party: 'Republican' }]
 
-  
+
   // maps the appropriate column to fields property
   public fields: Object = { text: 'name', value: 'name', groupBy: 'party' };
-  //Show/Hide first graph
+  // Show/Hide first graph
   firstGraphShow = true;
-  //Show/Hide second graph
+  // Show/Hide second graph
   secondGraphShow = true;
 
-  //minimum Date for Selection Date Box
+  // minimum Date for Selection Date Box
   minDate = Moment('2019-10-20', 'YYYY-MM-DD');
-  //maximum Date for Selection Date Box
+  // maximum Date for Selection Date Box
   maxDate = Moment('2020-05-10', 'YYYY-MM-DD');
-  // Keeps track of Slider Value to change week 
+  // Keeps track of Slider Value to change week
   sliderValue = 12;
 
-  //Title to pass in with Google chart Component
-  title = ""
+  // Title to pass in with Google chart Component
+  title = ''
 
   placeholder = 'Select Presidential Candidates'
   public mode: string;
@@ -65,14 +65,14 @@ export class MainComponent implements OnInit {
 
 
   // Value to display at the start of Slider
-  startDateVal = Moment(this.minDate).format("MMMM Do YYYY");
+  startDateVal = Moment(this.minDate).format('MMMM Do YYYY');
   // Value to display at the end of Slider
-  endDateVal = Moment(this.maxDate).format("MMMM Do YYYY");
+  endDateVal = Moment(this.maxDate).format('MMMM Do YYYY');
 
-  //Selected Candidates
+  // Selected Candidates
   selected: string[];
 
-  //Contains candidate data ready to be analyzed
+  // Contains candidate data ready to be analyzed
   candidateData: any;
 
   noDataForSecondCandidate = false;
@@ -86,20 +86,20 @@ export class MainComponent implements OnInit {
   sliderDate = this.startDateVal;
 
   public startDateFromSlider = this.minDate
-  public endDateFromSlider = this.minDate.add(7, "days")
+  public endDateFromSlider = this.minDate.add(7, 'days')
 
-  //Configuring timeline slider
-  public rangetype: string = 'Range';
-  public showButtons: boolean = true;
-  public mintime: number = 0;
+  // Configuring timeline slider
+  public rangetype = 'Range';
+  public showButtons = true;
+  public mintime = 0;
   public maxtime: number = this.maxDate.diff(this.minDate, 'days')
-  public steptime: number = 7;
+  public steptime = 7;
   public timevalue: number[] = [this.maxDate.diff(this.minDate, 'days') * 2 / 4, this.maxDate.diff(this.minDate, 'days') * 3 / 4];
-  
+
   public timetooltip: Object = {
     placement: 'Before',
     isVisible: true,
-    showOn: "Always"
+    showOn: 'Always'
   };
 
   public timeticks: Object = {
@@ -110,16 +110,16 @@ export class MainComponent implements OnInit {
   };
 
   disableTimeline = true;
-  //check if Mobile device or desktop
+  // check if Mobile device or desktop
   isMobile = false;
   public innerWidth: any;
 
 
-  //Used to adjust the color scales for each comparision
-  maxCandidateOne = {max: 0, state: ""} ;
-  maxCandidateTwo = {max: 0, state: ""} ;
+  // Used to adjust the color scales for each comparision
+  maxCandidateOne = {max: 0, state: ''} ;
+  maxCandidateTwo = {max: 0, state: ''} ;
 
-  //max state and money
+  // max state and money
   maxStateCandiateOne: any;
   maxStateCandiateTwo: any;
 
@@ -130,36 +130,36 @@ export class MainComponent implements OnInit {
     const newDate = this.minDate
     // Customizing each ticks text into days
 
-    args.text = newDate.add(args.value, "days").format("MMM Do YY")
+    args.text = newDate.add(args.value, 'days').format('MMM Do YY')
   }
 
   tooltipChange(args) {
-    //Set min and max date again to ensure they dont change
+    // Set min and max date again to ensure they dont change
     this.minDate = Moment('2019-10-20', 'YYYY-MM-DD');
     this.maxDate = Moment('2020-05-10', 'YYYY-MM-DD');
-    //Create a new date variable
-    var newDate = this.minDate
-    //Split them up so that we can extract the first circle and last circle value
-    let totalDate: string[] = args.text.split(' ');
+    // Create a new date variable
+    let newDate = this.minDate
+    // Split them up so that we can extract the first circle and last circle value
+    const totalDate: string[] = args.text.split(' ');
 
-    //first value
+    // first value
     let firstPart: string = totalDate[0]
-    //second value
+    // second value
     let lastPart: string = totalDate[2]
 
-    //Turn first part "x" into a date by adding x days to minimum date
-    firstPart = newDate.add(firstPart, 'days').format("MMMM Do YYYY")
-    //configure minDate so that max date does not mess up
+    // Turn first part "x" into a date by adding x days to minimum date
+    firstPart = newDate.add(firstPart, 'days').format('MMMM Do YYYY')
+    // configure minDate so that max date does not mess up
     this.minDate = Moment('2019-10-20', 'YYYY-MM-DD');
     newDate = this.minDate
-    lastPart = newDate.add(lastPart, 'days').format("MMMM Do YYYY")
+    lastPart = newDate.add(lastPart, 'days').format('MMMM Do YYYY')
 
     // Assigning our custom text to the tick value.
     args.text = firstPart + ' - ' + lastPart
     this.dateRange = args.text
-    //Make slider dates 
-    this.startDateFromSlider = Moment(firstPart, "MMMM Do YYYY");
-    this.endDateFromSlider = Moment(lastPart, "MMMM Do YYYY");
+    // Make slider dates
+    this.startDateFromSlider = Moment(firstPart, 'MMMM Do YYYY');
+    this.endDateFromSlider = Moment(lastPart, 'MMMM Do YYYY');
 
 
   }
@@ -169,7 +169,7 @@ export class MainComponent implements OnInit {
 
 
   }
- 
+
   @HostListener('window:resize', ['$event'])
   // if(this.isMobile == alse)
   onResize(event) {
@@ -183,7 +183,7 @@ export class MainComponent implements OnInit {
           smallStep: 7,
           showSmallTicks: true
         }
-      } 
+      }
       if(this.innerWidth < 690){
         this.timeticks = {
           placement: 'After',
@@ -191,20 +191,20 @@ export class MainComponent implements OnInit {
           smallStep: 7,
           showSmallTicks: true
         }
-      } 
+      }
 
       if (this.innerWidth < 300){
         this.timeticks = {
           placement: 'None',
-          
+
         }
       }
-    
+
   }
-  //Extract the CSV file and turn into dataframe to get ready for analysis
+  // Extract the CSV file and turn into dataframe to get ready for analysis
   getDataInDataFrame() {
     DataFrame.fromCSV(
-      "./assets/candidate_spend_by_state.csv"
+      './assets/candidate_spend_by_state.csv'
     )
       .then(df => {
 
@@ -220,12 +220,12 @@ export class MainComponent implements OnInit {
     // Sets limitation to the value selection
     this.maximumSelectionLength = 2;
     this.getDataInDataFrame()
-    //Check to see if it is on a mobile device to narrow the time ticks 
+    // Check to see if it is on a mobile device to narrow the time ticks
     this.isMobile = new isItMobile();
 
-    //Change time ticks range
+    // Change time ticks range
     if (this.isMobile == true) {
-      
+
       this.timeticks = {
         placement: 'After',
         largeStep: 42,
@@ -240,24 +240,24 @@ export class MainComponent implements OnInit {
 
 
   getData() {
-    //Reset max
-    this.maxCandidateOne = {max: 0, state: ""} 
-    this.maxCandidateTwo = {max: 0, state: ""} 
-    //Reset max
-    var meanCandidateOne = 0  
-    var meanCandidateTwo = 0
-    //reset Total Spending
+    // Reset max
+    this.maxCandidateOne = {max: 0, state: ''}
+    this.maxCandidateTwo = {max: 0, state: ''}
+    // Reset max
+    let meanCandidateOne = 0
+    let meanCandidateTwo = 0
+    // reset Total Spending
     this.totalSpendingForCandidateOne = 0
     this.totalSpendingForCandidateTwo = 0
-    //Query Selected Candidates data on a relevent date.
+    // Query Selected Candidates data on a relevent date.
     const candidateOne: any = this.candidateData.filter(row => row.get('page_name') == this.selected[0])
     const candidateOneWithDatRange = candidateOne.filter(row => (Moment(row.get('date')).valueOf() >= this.startDateFromSlider.valueOf()) && (Moment(row.get('date')).valueOf() <= this.endDateFromSlider.valueOf()))
-    const candidateOneFilteredWithAggregate: any = candidateOneWithDatRange.select("region", "amt_spent").groupBy('region').aggregate((group) => group.stat.sum("amt_spent")).rename("aggregation", "amt_spent").cast('amt_spent', Number)
+    const candidateOneFilteredWithAggregate: any = candidateOneWithDatRange.select('region', 'amt_spent').groupBy('region').aggregate((group) => group.stat.sum('amt_spent')).rename('aggregation', 'amt_spent').cast('amt_spent', Number)
     const candidateOneFilteredWithRegion: any = candidateOneFilteredWithAggregate.toArray()
-    meanCandidateOne = candidateOneFilteredWithAggregate.stat.max("amt_spent")
-    console.log(meanCandidateOne, "meanCandOne")
-    var candOne = candidateOneFilteredWithAggregate.select("amt_spent", 'region').toArray()
-    //Add total
+    meanCandidateOne = candidateOneFilteredWithAggregate.stat.max('amt_spent')
+    console.log(meanCandidateOne, 'meanCandOne')
+    const candOne = candidateOneFilteredWithAggregate.select('amt_spent', 'region').toArray()
+    // Add total
     candOne.forEach(element => {
       this.totalSpendingForCandidateOne += element[0]
       if( element[0] > this.maxCandidateOne.max ){
@@ -266,7 +266,7 @@ export class MainComponent implements OnInit {
       }
 
     });
-    
+
 
     this.candidateDataGlobal.newchartData[0] = candidateOneFilteredWithRegion
     // this.chartData[0] = candidateOneFilteredWithRegion;
@@ -279,15 +279,15 @@ export class MainComponent implements OnInit {
     if (this.selected.length > 1) {
       const candidateTwo: any = this.candidateData.filter(row => row.get('page_name') == this.selected[1])
       const candidateTwoWithDateRange = candidateTwo.filter(row => (Moment(row.get('date')).valueOf() >= this.startDateFromSlider.valueOf()) && (Moment(row.get('date')).valueOf() <= this.endDateFromSlider.valueOf()))
-      const candidateTwoFilteredWithAggregate: any = candidateTwoWithDateRange.select("region", "amt_spent").groupBy('region').aggregate((group) => group.stat.sum("amt_spent")).rename("aggregation", "amt_spent").cast('amt_spent', Number)
+      const candidateTwoFilteredWithAggregate: any = candidateTwoWithDateRange.select('region', 'amt_spent').groupBy('region').aggregate((group) => group.stat.sum('amt_spent')).rename('aggregation', 'amt_spent').cast('amt_spent', Number)
       const candidateTwoFilteredWithRegion = candidateTwoFilteredWithAggregate.toArray()
-      var candTwo = candidateTwoFilteredWithAggregate.cast('amt_spent', Number).select("amt_spent", 'region').toArray()
-      meanCandidateTwo = candidateTwoFilteredWithAggregate.union(candidateOneFilteredWithAggregate).stat.mean("amt_spent")
-      console.log("CombinedDataFrameMean", meanCandidateTwo)
+      const candTwo = candidateTwoFilteredWithAggregate.cast('amt_spent', Number).select('amt_spent', 'region').toArray()
+      meanCandidateTwo = candidateTwoFilteredWithAggregate.union(candidateOneFilteredWithAggregate).stat.mean('amt_spent')
+      console.log('CombinedDataFrameMean', meanCandidateTwo)
       // meanCandidateTwo = candidateTwoFilteredWithAggregate.stat.mean("amt_spent")
-      console.log(meanCandidateTwo, "meanCandidateTwo")
+      console.log(meanCandidateTwo, 'meanCandidateTwo')
 
-      //Add total
+      // Add total
       candTwo.forEach(element => {
         this.totalSpendingForCandidateTwo += element[0]
         if(element[0] > this.maxCandidateTwo.max  ){
@@ -296,23 +296,23 @@ export class MainComponent implements OnInit {
 
         }
       });
-     
+
        this.candidateDataGlobal.newchartData[1] = candidateTwoFilteredWithRegion
       // this.chartData[1] = candidateTwoFilteredWithRegion;
-    
-      
+
+
       if (this.candidateDataGlobal.newchartData[1].length == 0) {
         this.noDataForSecondCandidate = true;
       } else {
-        
+
         this.noDataForSecondCandidate = false;
       }
 
     }
-    
-    var meanFromBothCandidtates = meanCandidateOne
+
+    let meanFromBothCandidtates = meanCandidateOne
     this.candidateDataGlobal.maxVal = meanFromBothCandidtates
-    
+
     // var maxAmountFromBothCandidateData = Math.max(this.maxCandidateOne, this.maxCandidateTwo)
     // console.log(maxAmountFromBothCandidateData, "maxAmountFromBothCandidateData")
     // console.log(this.candidateDataGlobal.newchartData[1].length, "length of second")
@@ -334,44 +334,44 @@ export class MainComponent implements OnInit {
   }
 
   changeSlider(event) {
-    this.startDateVal = Moment(this.startDate.value).format("MMMM Do YYYY")
-    this.endDateVal = Moment(this.endDate.value).format("MMMM Do YYYY")
+    this.startDateVal = Moment(this.startDate.value).format('MMMM Do YYYY')
+    this.endDateVal = Moment(this.endDate.value).format('MMMM Do YYYY')
 
-    var momentObject = Moment(event.value)
+    const momentObject = Moment(event.value)
 
 
   }
   startDayChanged() {
-    this.startDateVal = Moment(this.startDate.value).format("MMMM Do YYYY")
-    this.endDateVal = Moment(this.endDate.value).format("MMMM Do YYYY")
+    this.startDateVal = Moment(this.startDate.value).format('MMMM Do YYYY')
+    this.endDateVal = Moment(this.endDate.value).format('MMMM Do YYYY')
 
-    //update data
+    // update data
     this.getData()
   }
- 
+
   selectedObject(args) {
     this.selected = args.value
     this.changed()
   }
 
-  //When timeline is changed
+  // When timeline is changed
   changed() {
-    //More than 2 Candidates Selected
+    // More than 2 Candidates Selected
     if (this.selected.length > 2) {
     }
 
     if (this.selected.length > 0) {
       this.disableTimeline = false
     }
-    
+
     this.GraphDisplay()
 
-    //Update chart Component data
+    // Update chart Component data
     this.getData()
 
   }
 
-  //Display one or two graph logic
+  // Display one or two graph logic
   GraphDisplay() {
     if (this.selected.length == 1) {
 
@@ -395,7 +395,7 @@ export class MainComponent implements OnInit {
     }
   }
 
-  
+
   sliderChanged(event) {
     // this.addWeek(event)
     this.getData()
@@ -403,7 +403,7 @@ export class MainComponent implements OnInit {
 
   addWeek(sliderVal: number) {
 
-    this.sliderDate = Moment(this.minDate, "MMMM Do YYYY").add(7 * sliderVal, "days").format("MMMM Do YYYY")
+    this.sliderDate = Moment(this.minDate, 'MMMM Do YYYY').add(7 * sliderVal, 'days').format('MMMM Do YYYY')
 
 
   }

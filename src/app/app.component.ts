@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 
 import { Component } from '@angular/core';
 
@@ -16,10 +16,10 @@ export class AppComponent {
   title = 'regional-spending-interface';
 
 
-  
- 
+
+
   constructor(
-    private http: HttpClient) { 
+    private http: HttpClient) {
 
     // this.http.get('../assets/candidate_spend_by_state.csv', {responseType: 'text'})
     // .subscribe(
@@ -42,6 +42,5 @@ export class AppComponent {
   }
 
 
-  
+
 }
- 

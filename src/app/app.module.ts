@@ -44,7 +44,7 @@ import { MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
     FormsModule,
     ReactiveFormsModule,
     MatListModule,
-    GoogleChartsModule.forRoot("AIzaSyDrOfgkGUtcfoM2ctSn-2bE47FyuSSj6gk"),
+    GoogleChartsModule.forRoot('AIzaSyDrOfgkGUtcfoM2ctSn-2bE47FyuSSj6gk'),
     MatSelectModule,MatNativeDateModule,MatDatepickerModule,MatInputModule,MatSliderModule,MatToolbarModule ],
   exports: [
    MatSelectModule,MatListModule,MatDatepickerModule,MatSliderModule,MatToolbarModule,MatCardModule
